@@ -1,0 +1,12 @@
+{
+  "posts": [
+    {
+      "id": "23cc",
+      "content": "Hello world!"
+    },
+    {
+      "id": "7f60",
+      "content": "Some random text!"
+    }
+  ]
+}
