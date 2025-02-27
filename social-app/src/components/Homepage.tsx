@@ -7,7 +7,7 @@ const Homepage = () => {
   return (
     <>
       {" "}
-      <div className="flex flex-row">
+      <div className="flex flex-row justify-evenly">
         <LeftSidebar />
         <MainContent />
         <RightSidebar />

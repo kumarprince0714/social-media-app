@@ -1,7 +1,13 @@
 //RightSidebar.tsx
 import { useNavigate } from "react-router-dom";
+import Searchbar from "./Searchbar";
 
-const RightSidebar = () => {
+interface RightSidebarProps {
+  onSearch: (query: string) => void;
+  onTypeSelect: (type: string) => void;
+}
+
+const RightSidebar: React.FC<RightSidebarProps> = ({ onSearch }) => {
   const navigate = useNavigate();
   const menuItems = [
     { label: "Groups", onClick: () => navigate(`/groups`) },
@@ -11,14 +17,15 @@ const RightSidebar = () => {
   return (
     <>
       {" "}
-      <div className="flex flex-col p-4 fixed top-20 right-0 h-[57vh] w-[25vw] lg:w-[18vw] bg-blue-300">
+      <div className="flex flex-col p-4 fixed top-[8%] right-0 min-h-[57vh] w-1/7 lg:w-1/6 ">
+        <Searchbar onSearch={onSearch} />
         {menuItems.map((item, index) => (
           <button
             key={index}
             onClick={item.onClick}
-            className=" text-gray-600 hover:text-blue-500 py-4 text-center my-2 gap-2"
+            className=" text-gray-600 text-center hover:text-blue-800 cursor-pointer py-4 my-2 gap-2 font-bold"
           >
-            {item.label}
+            {/* {item.label} */}
           </button>
         ))}
       </div>

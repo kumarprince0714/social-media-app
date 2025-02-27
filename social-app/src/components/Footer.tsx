@@ -5,7 +5,7 @@ const Footer = () => {
   const currentDate = dayjs().format("YYYY");
   return (
     <>
-      <div className="fixed bottom-0 left-0 right-0 mx-auto w-4/5 bg-white border-t border-gray-200 ">
+      <footer className=" bottom-0 left-0 right-0 mx-auto w-4/5 bg-white border-t border-gray-200 mt-auto">
         <div className="div1 w-full h-[363px] flex flex-row justify-between items-center">
           <div className="flex flex-col items-start space-y-3">
             <Link to="/about" className="text-black">
@@ -33,10 +33,10 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-        <footer className="bottom-0 text-center">
+        <div className="bottom-0 text-center">
           &copy; Tarams Technologies &nbsp; {currentDate}
-        </footer>
-      </div>
+        </div>
+      </footer>
     </>
   );
 };

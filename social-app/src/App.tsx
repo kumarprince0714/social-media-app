@@ -13,7 +13,7 @@ function App() {
     <>
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
-          <div>
+          <div className="flex flex-col min-h-[100vh]">
             <Header />
             {/* <h1 className="justify-center items-center text-blue-800">
             Social App!
