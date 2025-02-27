@@ -11,6 +11,7 @@ import { MdOutlineSubscriptions } from "react-icons/md";
 import { MdAddCard } from "react-icons/md";
 import { IoPersonOutline } from "react-icons/io5";
 import { CiCircleMore } from "react-icons/ci";
+import { RiAddBoxFill } from "react-icons/ri";
 
 const LeftSidebar = () => {
   const navigate = useNavigate();
@@ -79,6 +80,12 @@ const LeftSidebar = () => {
             </div>
           </button>
         ))}
+        <button className="hidden lg:flex items-center justify-center text-white rounded-sm ml-2 mt-2 bg-[#1308A8] w-25 h-9 cursor-pointer">
+          + New Post
+        </button>
+        <button title="New Post">
+          <RiAddBoxFill className="lg:hidden flex items-center justify-center text-gray-500 rounded-sm ml-1 mt-2 w text-2xl -8 h-8 cursor-pointer" />
+        </button>
       </div>
     </>
   );

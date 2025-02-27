@@ -8,6 +8,8 @@ import { FaRegHeart } from "react-icons/fa";
 import { LiaComment } from "react-icons/lia";
 
 import dayjs from "dayjs";
+const postTimeStamp = "ddd h:mm A | MMM D, YYYY";
+
 const MainContent: React.FC = () => {
   const [content, setContent] = useState("");
 
@@ -15,6 +17,7 @@ const MainContent: React.FC = () => {
 
   //const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  //imagePreview stores a Base64-encoded string of the uploaded image for display.
 
   //State for editing
   const [editingPostId, setEditingPostId] = useState<string | null>(null);
@@ -26,17 +29,21 @@ const MainContent: React.FC = () => {
     const file = e.target.files?.[0];
     if (file) {
       //setSelectedImage(file);
-      const reader = new FileReader();
+      const reader = new FileReader(); //creates a new FileReader instance to read the file.
       reader.onloadend = () => {
         setImagePreview(reader.result as string);
-      };
+      }; //Defining a callback function that runs when reading is complete
       reader.readAsDataURL(file);
     }
   };
 
   const handlePost = () => {
     if (content.trim() || imagePreview) {
-      addPost({ content, image: imagePreview || undefined });
+      addPost({
+        content,
+        image: imagePreview || undefined,
+        createdAt: new Date().toISOString(), //store timestamp
+      });
       setContent(""); //Clear input after posting
       // setSelectedImage(null);
       setImagePreview(null);
@@ -169,7 +176,13 @@ const MainContent: React.FC = () => {
                     <LiaComment />
                   </span>
                 </div>
-                <div>
+                <div className="flex">
+                  <span className="text-sm text-gray-500">
+                    {post.createdAt
+                      ? dayjs(post.createdAt).format(postTimeStamp)
+                      : ""}{" "}
+                    &nbsp;
+                  </span>{" "}
                   <span title="Add to bookmarks" className="cursor-pointer">
                     <IoBookmarkOutline />
                   </span>

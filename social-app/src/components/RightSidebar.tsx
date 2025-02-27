@@ -4,7 +4,6 @@ import Searchbar from "./Searchbar";
 
 interface RightSidebarProps {
   onSearch: (query: string) => void;
-  onTypeSelect: (type: string) => void;
 }
 
 const RightSidebar: React.FC<RightSidebarProps> = ({ onSearch }) => {

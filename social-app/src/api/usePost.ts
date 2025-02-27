@@ -7,6 +7,7 @@ export interface PostProps {
   id?: string;
   content: string;
   image?: string;
+  createdAt?: string;
 }
 
 export const usePost = () => {

@@ -16,12 +16,6 @@ export const addPost = async (post: PostProps) => {
 
 //Delete
 export const deletePost = async (id: string) => {
-  // const postResponse = await axios.get(`${BASE_URL}?id=${id}`);
-
-  // if (postResponse.data.length > 0) {
-  //   const postToRemove = postResponse.data[0];
-  //   return await axios.delete(`${BASE_URL}/${postToRemove.id}`);
-  // }
   return await axios.delete(`${BASE_URL}/${id}`);
 };
 
@@ -30,7 +24,7 @@ export const updatePost = async (post: PostProps) => {
   if (!post.id) {
     throw new Error("Post id is missing");
   }
-  const response = await axios.put(`${BASE_URL}/${post.id}`, {
+  const response = await axios.patch(`${BASE_URL}/${post.id}`, {
     content: post.content,
   });
   return response.data;
