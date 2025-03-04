@@ -72,9 +72,9 @@ const MainContent: React.FC = () => {
   };
 
   return (
-    <div className="w-[70vw] lg:w-full flex flex-col md:border border-gray-300">
+    <div className="w-[70vw] lg:w-[60vw] flex flex-col md:border border-gray-300">
       {/* Post Input Area */}
-      <div className="div1 w-[85%] lg:w-[90%] bg-[#E4E4E4] flex flex-col justify-center items-center lg:mx-[5%] mx-auto mt-[10vh] lg:mt-[8%] p-4 rounded-sm">
+      <div className="div1 w-[85%] lg:w-[65%] bg-[#E4E4E4] flex flex-col justify-center items-center mx-auto mt-[10vh] lg:mt-[8%] p-4 rounded-sm">
         <textarea
           className="w-[95%] h-32 bg-white p-2 rounded-sm"
           placeholder="Compose New Post"
@@ -87,8 +87,8 @@ const MainContent: React.FC = () => {
             htmlFor="imageUpload"
             className="cursor-pointer flex items-center gap-2"
           >
-            <FaImage className="text-xl" />
-            <span>Upload Image</span>
+            <FaImage className="text-xl" title="Upload image" />
+            {/* <span>Upload Image</span> */}
           </label>
           <input
             id="imageUpload"
@@ -117,11 +117,11 @@ const MainContent: React.FC = () => {
       </div>
 
       {/* Posts List */}
-      <div className="div2 mt-4 w-[85%] lg:w-[90%] mx-auto">
+      <div className="div2 mt-4 w-[85%] lg:w-[65%] mx-auto flex flex-col">
         {isLoading && <p>Loading posts...</p>}
         {error && <p>Error loading posts</p>}
         {posts &&
-          posts.map((post, index) => (
+          [...posts].reverse().map((post, index) => (
             <div
               key={index}
               className="p-2 border-b border-gray-300 flex flex-col gap-2"
@@ -143,7 +143,7 @@ const MainContent: React.FC = () => {
                   </>
                 ) : (
                   <>
-                    <span className="text-justify mt-4">{post.content}</span>
+                    <div className="flex text-justify mt-4">{post.content}</div>
                     <div>
                       <div className="flex items-center gap-2">
                         <MdModeEdit
@@ -160,13 +160,16 @@ const MainContent: React.FC = () => {
                 )}
               </div>
               {/* Display the uploaded image if available */}
-              {post.image && (
-                <img
-                  src={post.image}
-                  alt="Uploaded"
-                  className="flex h-auto w-auto object-contain mt-2"
-                />
-              )}
+              <div>
+                {post.image && (
+                  <img
+                    src={post.image}
+                    alt="Uploaded"
+                    className="flex h-auto w-auto object-contain mt-2"
+                  />
+                )}
+              </div>
+
               <div className="flex justify-between">
                 <div className="flex">
                   <span title="Like" className="cursor-pointer">

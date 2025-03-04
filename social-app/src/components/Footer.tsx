@@ -5,7 +5,7 @@ const Footer = () => {
   const currentDate = dayjs().format("YYYY");
   return (
     <>
-      <footer className=" bottom-0 left-0 right-0 mx-auto w-4/5 bg-white border-t border-gray-200 mt-auto">
+      <footer className=" bottom-0 left-0 right-0 mx-auto w-4/5 bg-white border-t border-gray-200 mt-5">
         <div className="div1 w-full h-[363px] flex flex-row justify-between items-center">
           <div className="flex flex-col items-start space-y-3">
             <Link to="/about" className="text-black">

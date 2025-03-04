@@ -63,7 +63,7 @@ const LeftSidebar = () => {
   return (
     <>
       {" "}
-      <div className="flex flex-col p-4 fixed top-[8%] left-0 h-auto w-1/7 lg:w-1/6 bg-white">
+      <div className="flex flex-col p-4 fixed top-[8%] left-0 h-auto w-1/7 lg:w-[18vw] bg-white">
         {menuItems.map((item, index) => (
           <button
             key={index}
