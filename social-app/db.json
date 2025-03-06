@@ -12,9 +12,24 @@
     },
     {
       "id": "233c",
-      "content": "Hi there!",
+      "content": "React JS!",
       "createdAt": "2025-03-04T10:05:36.405Z"
     }
   ],
-  "profile": []
+  "profile": [
+    {
+      "id": "3451",
+      "about": "Hello World!",
+      "name": "Harry Potter",
+      "username": "Potterhead",
+      "email": "harry@gryffindor.com",
+      "password": "horcrux",
+      "location": "4, Privet Drive",
+      "website": "www.warnerbros.com",
+      "social": "@instagram",
+      "uniqueURL": "myUniqueURL",
+      "activityStatus": false,
+      "subscriptionStatus": true
+    }
+  ]
 }

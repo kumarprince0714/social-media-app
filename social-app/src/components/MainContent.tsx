@@ -136,7 +136,7 @@ const MainContent: React.FC = () => {
                     />
                     <button
                       onClick={() => handleSave(post.id!)}
-                      className="bg-green-600 text-black px-2 py-1 rounded ml-2"
+                      className="bg-[#1308A8] text-white px-4 py-1 cursor-pointer rounded-sm ml-2"
                     >
                       Save
                     </button>
