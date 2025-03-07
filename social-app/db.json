@@ -28,7 +28,7 @@
       "website": "www.warnerbros.com",
       "social": "@instagram",
       "uniqueURL": "myUniqueURL",
-      "activityStatus": false,
+      "activityStatus": true,
       "subscriptionStatus": true
     }
   ]

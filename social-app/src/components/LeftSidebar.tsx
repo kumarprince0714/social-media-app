@@ -16,7 +16,7 @@ import { RiAddBoxFill } from "react-icons/ri";
 const LeftSidebar = () => {
   const navigate = useNavigate();
   const menuItems = [
-    { label: "Home", icon: <RiHomeLine />, onClick: () => navigate(`/home`) },
+    { label: "Home", icon: <RiHomeLine />, onClick: () => navigate(`/`) },
     {
       label: "Notifications",
       icon: <IoMdNotificationsOutline />,

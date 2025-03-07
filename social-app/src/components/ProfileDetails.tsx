@@ -53,7 +53,11 @@ const ProfileDetails: React.FC = () => {
   return (
     <>
       <div className="w-[70vw] lg:w-[60vw] h-auto flex flex-col md:border border-gray-300">
-        <div className="w-full h-80 bg-[#F1F1FF]"></div>
+        <div className="w-full h-80 bg-[#F1F1FF] relative">
+          <span className=" left-[5vw] absolute bottom-0 mb-2 text-2xl font-serif">
+            {profileData.name}
+          </span>
+        </div>
         <div>
           <span className="flex mt-2 ml-[5vw] font-bold text-gray-500">
             @{profileData.username}
