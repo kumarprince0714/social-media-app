@@ -1,13 +1,21 @@
 //usePost.ts
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { getPosts, addPost, deletePost, updatePost } from "./usePostService";
+import {
+  getPosts,
+  addPost,
+  deletePost,
+  updatePost,
+  toggleLike,
+} from "./usePostService";
 
 export interface PostProps {
   id?: string;
   content: string;
   image?: string;
   createdAt?: string;
+  likes?: number;
+  liked?: boolean;
 }
 
 export const usePost = () => {
@@ -48,6 +56,13 @@ export const usePost = () => {
     },
   });
 
+  const likeMutation = useMutation({
+    mutationFn: toggleLike,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+    },
+  });
+
   return {
     posts,
     isLoading,
@@ -55,5 +70,6 @@ export const usePost = () => {
     addPost: addMutation.mutate,
     removePost: removeMutation.mutate,
     updatePost: updateMutation.mutate,
+    toggleLike: likeMutation.mutate,
   };
 };

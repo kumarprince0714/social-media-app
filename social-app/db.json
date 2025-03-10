@@ -3,17 +3,30 @@
     {
       "id": "27cb",
       "content": "Hello World!",
-      "createdAt": "2025-02-27T06:28:13.286Z"
+      "createdAt": "2025-02-27T06:28:13.286Z",
+      "liked": false,
+      "likes": 0
     },
     {
       "id": "c51e",
       "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quos laudantium saepe magnam consequuntur, iusto laborum laboriosam, explicabo et beatae perspiciatis expedita. Sunt, expedita perspiciatis quidem quasi ab voluptatem reiciendis!       Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quos laudantium saepe magnam consequuntur, iusto laborum laboriosam, explicabo et beatae perspiciatis expedita. Sunt, expedita perspiciatis quidem quasi ab voluptatem reiciendis!\n\n",
-      "createdAt": "2025-02-27T10:40:10.932Z"
+      "createdAt": "2025-02-27T10:40:10.932Z",
+      "liked": true,
+      "likes": 1
     },
     {
       "id": "233c",
       "content": "React JS!",
-      "createdAt": "2025-03-04T10:05:36.405Z"
+      "createdAt": "2025-03-04T10:05:36.405Z",
+      "liked": false,
+      "likes": 0
+    },
+    {
+      "id": "6280",
+      "content": "March 10th!",
+      "createdAt": "2025-03-10T08:51:12.030Z",
+      "likes": 1,
+      "liked": true
     }
   ],
   "profile": [

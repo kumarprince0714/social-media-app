@@ -1,10 +1,10 @@
 //MainContent.tsx
 import React, { useState } from "react";
-import { usePost } from "../api/usePost";
+import { PostProps, usePost } from "../api/usePost";
 import { MdDelete, MdModeEdit } from "react-icons/md";
 import { FaImage } from "react-icons/fa";
 import { IoBookmarkOutline } from "react-icons/io5";
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { LiaComment } from "react-icons/lia";
 
 import dayjs from "dayjs";
@@ -22,8 +22,15 @@ const MainContent: React.FC = () => {
   //State for editing
   const [editingPostId, setEditingPostId] = useState<string | null>(null);
   const [editContent, setEditContent] = useState("");
-  const { posts, isLoading, error, addPost, removePost, updatePost } =
-    usePost();
+  const {
+    posts,
+    isLoading,
+    error,
+    addPost,
+    removePost,
+    updatePost,
+    toggleLike,
+  } = usePost();
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -69,6 +76,10 @@ const MainContent: React.FC = () => {
       setEditingPostId(null);
       setEditContent("");
     }
+  };
+
+  const handleLike = (post: PostProps) => {
+    toggleLike(post);
   };
 
   return (
@@ -172,8 +183,16 @@ const MainContent: React.FC = () => {
 
               <div className="flex justify-between">
                 <div className="flex">
-                  <span title="Like" className="cursor-pointer">
-                    <FaRegHeart />
+                  <span
+                    title={post.liked ? "Unlike" : "Like"}
+                    className="cursor-pointer"
+                    onClick={() => handleLike(post)}
+                  >
+                    {!post.liked ? (
+                      <FaRegHeart />
+                    ) : (
+                      <FaHeart className="text-red-600" />
+                    )}
                   </span>
                   <span title="Comment" className="cursor-pointer ml-2">
                     <LiaComment />
