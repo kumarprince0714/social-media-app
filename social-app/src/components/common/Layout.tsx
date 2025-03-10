@@ -4,6 +4,7 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import Header from "../Header";
 import Homepage from "../Homepage";
 import ProfilePage from "../ProfilePage";
+import GroupPage from "./GroupPage";
 import Footer from "../Footer";
 
 const queryClient = new QueryClient();
@@ -18,6 +19,7 @@ const Layout = () => {
             <Routes>
               <Route path="/" element={<Homepage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/groups" element={<GroupPage />} />
             </Routes>
             <Footer />
           </div>
