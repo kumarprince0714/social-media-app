@@ -5,6 +5,7 @@ import Header from "../Header";
 import Homepage from "../Homepage";
 import ProfilePage from "../ProfilePage";
 import GroupPage from "./GroupPage";
+import BookmarkPage from "../bookmarks/BookmarkPage";
 import Footer from "../Footer";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const Layout = () => {
               <Route path="/" element={<Homepage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/groups" element={<GroupPage />} />
+              <Route path="bookmarks" element={<BookmarkPage />} />
             </Routes>
             <Footer />
           </div>

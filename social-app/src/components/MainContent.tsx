@@ -1,11 +1,14 @@
 //MainContent.tsx
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { PostProps, usePost } from "../api/usePost";
+import { useBookmark } from "../api/useBookmark";
 import { MdDelete, MdModeEdit } from "react-icons/md";
 import { FaImage } from "react-icons/fa";
-import { IoBookmarkOutline } from "react-icons/io5";
+import { FaRegBookmark, FaBookmark } from "react-icons/fa";
+
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { LiaComment } from "react-icons/lia";
+import { LuLoader } from "react-icons/lu";
 
 import dayjs from "dayjs";
 const postTimeStamp = "ddd h:mm A | MMM D, YYYY";
@@ -31,6 +34,17 @@ const MainContent: React.FC = () => {
     updatePost,
     toggleLike,
   } = usePost();
+
+  const { bookmarks, addToBookmarks, removeFromBookmarks } = useBookmark();
+
+  const bookmarksSet = useMemo(
+    () => new Set(bookmarks?.map((post) => post.id)),
+    [bookmarks]
+  );
+
+  const isPostInBookmarks = (id: string) => {
+    return bookmarksSet?.has(id);
+  };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -81,6 +95,29 @@ const MainContent: React.FC = () => {
   const handleLike = (post: PostProps) => {
     toggleLike(post);
   };
+
+  const handleBookmark = (e: React.MouseEvent, post: PostProps) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!post.id) {
+      console.log("Cannot add post to bookmarks: post id is missing");
+    }
+
+    if (isPostInBookmarks(post.id)) {
+      removeFromBookmarks(post.id);
+    } else {
+      addToBookmarks(post);
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <LuLoader className="animate" color="#3b82f6" size={50} />
+      </div>
+    );
+  }
 
   return (
     <div className="w-[70vw] lg:w-[60vw] flex flex-col md:border border-gray-300">
@@ -205,9 +242,21 @@ const MainContent: React.FC = () => {
                       : ""}{" "}
                     &nbsp;
                   </span>{" "}
-                  <span title="Add to bookmarks" className="cursor-pointer">
-                    <IoBookmarkOutline />
-                  </span>
+                  <button
+                    className="cursor-pointer"
+                    onClick={(e) => handleBookmark(e, post)}
+                    title={
+                      isPostInBookmarks(post.id)
+                        ? "Remove from Bookmarks"
+                        : "Add to bookmarks"
+                    }
+                  >
+                    {isPostInBookmarks(post.id) ? (
+                      <FaBookmark />
+                    ) : (
+                      <FaRegBookmark />
+                    )}
+                  </button>
                 </div>
               </div>
             </div>
