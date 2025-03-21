@@ -7,11 +7,14 @@ import { GoArrowLeft } from "react-icons/go";
 import { Link } from "react-router-dom";
 
 const BookmarkComponent: React.FC = () => {
-  //const navigate = useNavigate();
-
   const { bookmarks, removeFromBookmarks } = useBookmark();
 
   const handleRemoveBookmark = (id: string | undefined) => {
+    if (!id) {
+      console.log("Invalid ID: Cannot remove bookmark");
+      return;
+    }
+
     try {
       console.log("Removing post with id", id);
       removeFromBookmarks(id);
@@ -64,7 +67,7 @@ const BookmarkComponent: React.FC = () => {
               </p>
             ) : (
               <div className="mt-4 w-[85%] lg:w-[65%] mx-auto flex flex-col ">
-                {bookmarks?.map((post) => (
+                {[...(bookmarks ?? [])].reverse().map((post) => (
                   <div key={post.id} className="w-full">
                     <div className="div1 text-justify mt-4 w-full">
                       {post.content}

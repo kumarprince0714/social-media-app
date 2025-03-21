@@ -1,5 +1,5 @@
 //useProfile.ts
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import {
   getProfileDetails,
   addProfileDetails,
@@ -22,29 +22,23 @@ export interface ProfileProps {
 }
 
 export const useProfile = () => {
-  const queryClient = useQueryClient();
-
   const {
     data: profile,
     isLoading,
     error,
-    //refetch
+    refetch,
   } = useQuery<ProfileProps[]>({
     queryKey: ["profile"],
     queryFn: getProfileDetails,
   });
   const addMutation = useMutation({
     mutationFn: addProfileDetails,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["profile"] });
-    },
+    onSuccess: () => refetch(),
   });
 
   const updateMutation = useMutation({
     mutationFn: updateProfile,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["profile"] });
-    },
+    onSuccess: () => refetch(),
   });
   return {
     profile,

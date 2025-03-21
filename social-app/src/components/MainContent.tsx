@@ -18,7 +18,6 @@ const MainContent: React.FC = () => {
 
   //Image
 
-  //const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   //imagePreview stores a Base64-encoded string of the uploaded image for display.
 
@@ -49,7 +48,6 @@ const MainContent: React.FC = () => {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      //setSelectedImage(file);
       const reader = new FileReader(); //creates a new FileReader instance to read the file.
       reader.onloadend = () => {
         setImagePreview(reader.result as string);
@@ -66,7 +64,7 @@ const MainContent: React.FC = () => {
         createdAt: new Date().toISOString(), //store timestamp
       });
       setContent(""); //Clear input after posting
-      // setSelectedImage(null);
+
       setImagePreview(null);
     }
   };
@@ -86,7 +84,10 @@ const MainContent: React.FC = () => {
   };
   const handleSave = (id: string) => {
     if (editContent.trim()) {
-      updatePost({ id, content: editContent });
+      const postToUpdate = posts?.find((post) => post.id === id);
+      if (!postToUpdate) return;
+
+      updatePost({ ...postToUpdate, content: editContent });
       setEditingPostId(null);
       setEditContent("");
     }

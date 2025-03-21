@@ -1,6 +1,6 @@
 //usePostService.ts
 import axios from "axios";
-import { PostProps } from "./usePost";
+import { NewPostProps, PostProps } from "./usePost";
 
 const BASE_URL = "http://localhost:4000/posts";
 
@@ -10,12 +10,8 @@ export const getPosts = async () => {
 };
 
 //Add
-export const addPost = async (post: PostProps) => {
-  const response = await axios.post(BASE_URL, {
-    ...post,
-    likes: 0,
-    liked: false,
-  });
+export const addPost = async (post: NewPostProps) => {
+  const response = await axios.post(BASE_URL, post);
   return response.data;
 };
 

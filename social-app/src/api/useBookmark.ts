@@ -1,5 +1,5 @@
 //useBookmark.ts
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import {
   getBookmarksList,
   addToBookmarks,
@@ -9,13 +9,11 @@ import {
 import { PostProps } from "./usePost";
 
 export const useBookmark = () => {
-  const queryClient = useQueryClient();
-
   const {
     data: bookmarks,
     isLoading,
     error,
-    //refetch,
+    refetch,
   } = useQuery<PostProps[]>({
     queryKey: ["bookmarks"],
     queryFn: getBookmarksList,
@@ -23,14 +21,12 @@ export const useBookmark = () => {
 
   const addMutation = useMutation({
     mutationFn: addToBookmarks,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["bookmarks"] }),
+    onSuccess: () => refetch(),
   });
 
   const removeMutation = useMutation({
     mutationFn: removeFromBookmarks,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["bookmarks"] });
-    },
+    onSuccess: () => refetch(),
   });
 
   return {
