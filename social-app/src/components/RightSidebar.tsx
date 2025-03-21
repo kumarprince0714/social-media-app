@@ -17,7 +17,9 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ onSearch }) => {
     <>
       {" "}
       <div className="flex flex-col p-4 fixed top-[8%] right-0 min-h-[57vh] w-1/7 lg:w-[18vw] px-auto">
-        <Searchbar onSearch={onSearch} />
+        <div className="hidden lg:block">
+          <Searchbar onSearch={onSearch} />
+        </div>
         {menuItems.map((item, index) => (
           <button
             key={index}

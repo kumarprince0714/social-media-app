@@ -10,10 +10,16 @@ import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { LiaComment } from "react-icons/lia";
 import { LuLoader } from "react-icons/lu";
 
+import Searchbar from "./Searchbar";
+
 import dayjs from "dayjs";
 const postTimeStamp = "ddd h:mm A | MMM D, YYYY";
 
-const MainContent: React.FC = () => {
+interface MainContentProps {
+  onSearch: (query: string) => void;
+}
+
+const MainContent: React.FC<MainContentProps> = ({ onSearch }) => {
   const [content, setContent] = useState("");
 
   //Image
@@ -103,6 +109,7 @@ const MainContent: React.FC = () => {
 
     if (!post.id) {
       console.log("Cannot add post to bookmarks: post id is missing");
+      return;
     }
 
     if (isPostInBookmarks(post.id)) {
@@ -122,8 +129,11 @@ const MainContent: React.FC = () => {
 
   return (
     <div className="w-[70vw] lg:w-[60vw] flex flex-col md:border border-gray-300">
+      <div className="flex justify-center w-full lg:hidden mb-0 mt-[6vh] ">
+        <Searchbar onSearch={onSearch} matchDivWidth={true} />
+      </div>
       {/* Post Input Area */}
-      <div className="div1 w-[85%] lg:w-[65%] bg-[#E4E4E4] flex flex-col justify-center items-center mx-auto mt-[10vh] lg:mt-[8%] p-4 rounded-sm">
+      <div className="div1 w-[85%] lg:w-[65%] bg-[#E4E4E4] flex flex-col justify-center items-center mx-auto mt-[2vh] lg:mt-[8%] p-4 rounded-sm">
         <textarea
           className="w-[95%] h-32 bg-white p-2 rounded-sm"
           placeholder="Compose New Post"
@@ -244,6 +254,7 @@ const MainContent: React.FC = () => {
                     &nbsp;
                   </span>{" "}
                   <button
+                    type="button" //Add this line to explicitly prevent form submission
                     className="cursor-pointer"
                     onClick={(e) => handleBookmark(e, post)}
                     title={
