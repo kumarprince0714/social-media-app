@@ -1,5 +1,6 @@
 //MainContent.tsx
 import React, { useMemo, useState } from "react";
+import { useParams } from "react-router-dom";
 import { PostProps, usePost } from "../api/usePost";
 import { useBookmark } from "../api/useBookmark";
 import { MdDelete, MdModeEdit } from "react-icons/md";
@@ -20,6 +21,10 @@ interface MainContentProps {
 }
 
 const MainContent: React.FC<MainContentProps> = ({ onSearch }) => {
+  const { username } = useParams<{ username: string }>();
+
+  const currentUser = username || "user1";
+
   const [content, setContent] = useState("");
 
   //Image
@@ -38,9 +43,10 @@ const MainContent: React.FC<MainContentProps> = ({ onSearch }) => {
     removePost,
     updatePost,
     toggleLike,
-  } = usePost();
+  } = usePost(currentUser);
 
-  const { bookmarks, addToBookmarks, removeFromBookmarks } = useBookmark();
+  const { bookmarks, addToBookmarks, removeFromBookmarks } =
+    useBookmark(currentUser);
 
   const bookmarksSet = useMemo(
     () => new Set(bookmarks?.map((post) => post.id)),

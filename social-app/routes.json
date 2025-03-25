@@ -1,0 +1,5 @@
+{
+  "/:username/posts": "/:username/posts",
+  "/:username/profile": "/:username/profile",
+  "/:username/bookmarks": "/:username/bookmarks"
+}

@@ -24,7 +24,7 @@ export interface PostProps {
   liked: boolean;
 }
 
-export const usePost = () => {
+export const usePost = (username: string) => {
   //Get posts
   const {
     data: posts,
@@ -32,30 +32,30 @@ export const usePost = () => {
     error,
     refetch,
   } = useQuery<PostProps[]>({
-    queryKey: ["posts"],
-    queryFn: getPosts,
+    queryKey: ["posts", username],
+    queryFn: () => getPosts(username),
   });
 
   //Add post
   const addMutation = useMutation({
-    mutationFn: (newPost: NewPostProps) => addPost(newPost),
+    mutationFn: (newPost: NewPostProps) => addPost(username, newPost),
     onSuccess: () => refetch(),
   });
 
   //Delete post
   const removeMutation = useMutation({
-    mutationFn: deletePost,
+    mutationFn: (id: string) => deletePost(username, id),
     onSuccess: () => refetch(),
   });
 
   //Edit post
   const updateMutation = useMutation({
-    mutationFn: updatePost,
+    mutationFn: (post: PostProps) => updatePost(username, post),
     onSuccess: () => refetch(),
   });
 
   const likeMutation = useMutation({
-    mutationFn: toggleLike,
+    mutationFn: (post: PostProps) => toggleLike(username, post),
     onSuccess: () => refetch(),
   });
 

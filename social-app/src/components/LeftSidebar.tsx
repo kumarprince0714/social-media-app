@@ -1,6 +1,6 @@
 //LeftSidebar.tsx
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { RiHomeLine } from "react-icons/ri";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { TiMessages } from "react-icons/ti";
@@ -15,50 +15,80 @@ import { RiAddBoxFill } from "react-icons/ri";
 
 const LeftSidebar = () => {
   const navigate = useNavigate();
+
+  const location = useLocation();
+
+  const { username } = useParams<{ username: string }>();
+
+  // Building a prefix for routes. If username is not defined, use an empty string.
+  const userPrefix = username ? `/${username}` : "";
+
   const menuItems = [
-    { label: "Home", icon: <RiHomeLine />, onClick: () => navigate(`/`) },
+    {
+      label: "Home",
+      icon: <RiHomeLine />,
+      onClick: () => navigate(userPrefix),
+      path: userPrefix || "/",
+    },
     {
       label: "Notifications",
       icon: <IoMdNotificationsOutline />,
-      onClick: () => navigate(`/notifications`),
+      onClick: () => navigate(`${userPrefix}/notifications`),
+      path: `${userPrefix}/notifications`,
     },
     {
       label: "Messages",
       icon: <TiMessages />,
-      onClick: () => navigate(`/messages`),
+      onClick: () => navigate(`${userPrefix}/messages`),
+      path: `${userPrefix}/messages`,
     },
     {
       label: "Bookmarks",
       icon: <PiBookmarkSimpleLight />,
-      onClick: () => navigate(`/bookmarks`),
+      onClick: () => navigate(`${userPrefix}/bookmarks`),
+      path: `${userPrefix}/bookmarks`,
     },
     {
       label: "Lists",
       icon: <IoListSharp />,
-      onClick: () => navigate(`/lists`),
+      onClick: () => navigate(`${userPrefix}/lists`),
+      path: `${userPrefix}/lists`,
     },
     {
       label: "Groups",
       icon: <MdOutlineGroups />,
-      onClick: () => navigate(`/groups`),
+      onClick: () => navigate(`${userPrefix}/groups`),
+      path: `${userPrefix}/groups`,
     },
     {
       label: "Subscriptions",
       icon: <MdOutlineSubscriptions />,
-      onClick: () => navigate(`/subscriptions`),
+      onClick: () => navigate(`${userPrefix}/subscriptions`),
+      path: `${userPrefix}/subscriptions`,
     },
     {
       label: "Add Card",
       icon: <MdAddCard />,
-      onClick: () => navigate(`/payments`),
+      onClick: () => navigate(`${userPrefix}/payments`),
+      path: `${userPrefix}/payments`,
     },
     {
       label: "My Profile",
       icon: <IoPersonOutline />,
-      onClick: () => navigate(`/profile`),
+      onClick: () => navigate(`${userPrefix}/profile`),
+      path: `${userPrefix}/profile`,
     },
-    { label: "More", icon: <CiCircleMore />, onClick: () => navigate(`/more`) },
+    {
+      label: "More",
+      icon: <CiCircleMore />,
+      onClick: () => navigate(`${userPrefix}/more`),
+      path: `${userPrefix}/more`,
+    },
   ];
+
+  const isActive = (path: string) => {
+    return location.pathname === path || location.pathname.startsWith(path);
+  };
 
   return (
     <>
@@ -68,13 +98,24 @@ const LeftSidebar = () => {
           <button
             key={index}
             onClick={item.onClick}
-            className=" text-gray-500 ml-2 hover:text-gray-600 cursor-pointer py-4 gap-1  font-bold text-left"
+            className={`text-gray-500 ml-2 hover:text-gray-600 cursor-pointer py-4 gap-1 font-bold text-left 
+              ${isActive(item.path) ? "text-[#1308A8]" : ""}
+            `}
           >
             <div className="flex items-center gap-1">
-              <span title={item.label} className="flex flex-shrink-0 mt-1">
+              <span
+                title={item.label}
+                className={`flex flex-shrink-0 mt-1 
+                ${isActive(item.path) ? "text-[#1308A8]" : ""}
+              `}
+              >
                 {item.icon}&nbsp;
               </span>
-              <span className="whitespace-nowrap overflow-hidden  flex-grow hidden lg:inline">
+              <span
+                className={`whitespace-nowrap overflow-hidden flex-grow hidden lg:inline 
+              ${isActive(item.path) ? "text-[#1308A8]" : ""}
+            `}
+              >
                 {item.label}
               </span>
             </div>

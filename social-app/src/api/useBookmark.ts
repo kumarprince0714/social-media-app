@@ -8,24 +8,24 @@ import {
 
 import { PostProps } from "./usePost";
 
-export const useBookmark = () => {
+export const useBookmark = (username: string) => {
   const {
     data: bookmarks,
     isLoading,
     error,
     refetch,
   } = useQuery<PostProps[]>({
-    queryKey: ["bookmarks"],
-    queryFn: getBookmarksList,
+    queryKey: ["bookmarks", username],
+    queryFn: () => getBookmarksList(username),
   });
 
   const addMutation = useMutation({
-    mutationFn: addToBookmarks,
+    mutationFn: (post: PostProps) => addToBookmarks(username, post),
     onSuccess: () => refetch(),
   });
 
   const removeMutation = useMutation({
-    mutationFn: removeFromBookmarks,
+    mutationFn: (id: string) => removeFromBookmarks(username, id),
     onSuccess: () => refetch(),
   });
 

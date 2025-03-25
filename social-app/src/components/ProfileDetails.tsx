@@ -1,11 +1,16 @@
 //ProfileDetails.tsx
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { FaToggleOff, FaToggleOn } from "react-icons/fa";
 
 import { ProfileProps, useProfile } from "../api/useProfile";
 
 const ProfileDetails: React.FC = () => {
-  const { profile, isLoading, error, updateMutation } = useProfile();
+  const { username } = useParams<{ username: string }>();
+
+  const currentUser = username || "user1";
+
+  const { profile, isLoading, error, updateMutation } = useProfile(currentUser);
 
   const [profileData, setProfileData] = useState<ProfileProps>({
     about: "",
@@ -22,8 +27,8 @@ const ProfileDetails: React.FC = () => {
   });
 
   useEffect(() => {
-    if (profile && profile.length > 0) {
-      setProfileData(profile[0]); //Since we only have 1 profile
+    if (profile) {
+      setProfileData(profile); //Since we only have 1 profile
     }
   }, [profile]);
 

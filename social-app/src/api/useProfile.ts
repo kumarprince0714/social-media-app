@@ -4,7 +4,7 @@ import {
   getProfileDetails,
   addProfileDetails,
   updateProfile,
-  deleteProfile,
+  //deleteProfile,
 } from "./useProfileService";
 export interface ProfileProps {
   id?: string;
@@ -21,23 +21,23 @@ export interface ProfileProps {
   subscriptionStatus: boolean;
 }
 
-export const useProfile = () => {
+export const useProfile = (username: string) => {
   const {
     data: profile,
     isLoading,
     error,
     refetch,
-  } = useQuery<ProfileProps[]>({
-    queryKey: ["profile"],
-    queryFn: getProfileDetails,
+  } = useQuery<ProfileProps | null>({
+    queryKey: ["profile", username],
+    queryFn: () => getProfileDetails(username),
   });
   const addMutation = useMutation({
-    mutationFn: addProfileDetails,
+    mutationFn: (profile: ProfileProps) => addProfileDetails(username, profile),
     onSuccess: () => refetch(),
   });
 
   const updateMutation = useMutation({
-    mutationFn: updateProfile,
+    mutationFn: (profile: ProfileProps) => updateProfile(username, profile),
     onSuccess: () => refetch(),
   });
   return {

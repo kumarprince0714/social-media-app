@@ -1,3 +1,4 @@
+//Layout.tsx
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
@@ -18,10 +19,10 @@ const Layout = () => {
           <div className="flex flex-col min-h-[100vh]">
             <Header />
             <Routes>
-              <Route path="/" element={<Homepage />} />
-              <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/groups" element={<GroupPage />} />
-              <Route path="bookmarks" element={<BookmarkPage />} />
+              <Route path="/:username" element={<Homepage />} />
+              <Route path="/:username/profile" element={<ProfilePage />} />
+              <Route path="/:username/groups" element={<GroupPage />} />
+              <Route path="/:username/bookmarks" element={<BookmarkPage />} />
             </Routes>
             <Footer />
           </div>

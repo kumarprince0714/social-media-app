@@ -1,13 +1,17 @@
 //BookmarkComponent.tsx
 
 import React from "react";
+import { useParams } from "react-router-dom";
 import { useBookmark } from "../../api/useBookmark";
 import { FaRegBookmark } from "react-icons/fa";
 import { GoArrowLeft } from "react-icons/go";
 import { Link } from "react-router-dom";
 
 const BookmarkComponent: React.FC = () => {
-  const { bookmarks, removeFromBookmarks } = useBookmark();
+  const { username } = useParams<{ username: string }>();
+  const currentUser = username || "user1";
+
+  const { bookmarks, removeFromBookmarks } = useBookmark(currentUser);
 
   const handleRemoveBookmark = (id: string | undefined) => {
     if (!id) {
