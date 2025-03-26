@@ -87,7 +87,7 @@ const LeftSidebar = () => {
   ];
 
   const isActive = (path: string) => {
-    return location.pathname === path || location.pathname.startsWith(path);
+    return location.pathname === path;
   };
 
   return (
@@ -121,7 +121,10 @@ const LeftSidebar = () => {
             </div>
           </button>
         ))}
-        <button className="hidden lg:flex items-center justify-center text-white rounded-sm ml-2 mt-2 bg-[#1308A8] w-25 h-9 cursor-pointer">
+        <button
+          className="hidden lg:flex items-center justify-center text-white rounded-sm ml-2 mt-2 bg-[#1308A8] w-25 h-9 cursor-pointer"
+          onClick={() => {}}
+        >
           + New Post
         </button>
         <button title="New Post">

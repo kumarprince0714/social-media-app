@@ -163,6 +163,7 @@ const MainContent: React.FC<MainContentProps> = ({ onSearch }) => {
             className="hidden"
           />
           <button
+            type="button"
             onClick={handlePost}
             className="bg-[#1308A8] text-white px-4 py-2 rounded-sm"
           >
@@ -200,6 +201,7 @@ const MainContent: React.FC<MainContentProps> = ({ onSearch }) => {
                       onChange={(e) => setEditContent(e.target.value)}
                     />
                     <button
+                      type="button"
                       onClick={() => handleSave(post.id!)}
                       className="bg-[#1308A8] text-white px-4 py-1 cursor-pointer rounded-sm ml-2"
                     >
@@ -241,11 +243,12 @@ const MainContent: React.FC<MainContentProps> = ({ onSearch }) => {
                     title={post.liked ? "Unlike" : "Like"}
                     className="cursor-pointer"
                     onClick={() => handleLike(post)}
+                    role="button"
                   >
                     {!post.liked ? (
-                      <FaRegHeart />
+                      <FaRegHeart type="button" />
                     ) : (
-                      <FaHeart className="text-red-600" />
+                      <FaHeart className="text-red-600" type="button" />
                     )}
                   </span>
                   <span title="Comment" className="cursor-pointer ml-2">

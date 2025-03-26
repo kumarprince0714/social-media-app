@@ -44,18 +44,18 @@ export const usePost = (username: string) => {
 
   //Delete post
   const removeMutation = useMutation({
-    mutationFn: (id: string) => deletePost(username, id),
+    mutationFn: (id: string) => deletePost(id),
     onSuccess: () => refetch(),
   });
 
   //Edit post
   const updateMutation = useMutation({
-    mutationFn: (post: PostProps) => updatePost(username, post),
+    mutationFn: (post: PostProps) => updatePost(post),
     onSuccess: () => refetch(),
   });
 
   const likeMutation = useMutation({
-    mutationFn: (post: PostProps) => toggleLike(username, post),
+    mutationFn: (post: PostProps) => toggleLike(post),
     onSuccess: () => refetch(),
   });
 

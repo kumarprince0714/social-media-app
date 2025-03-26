@@ -29,12 +29,12 @@ export const addPost = async (username: string, post: NewPostProps) => {
 };
 
 // Delete a post for a specific user
-export const deletePost = async (username: string, id: string) => {
+export const deletePost = async (id: string) => {
   return await axios.delete(`http://localhost:4000/posts/${id}`);
 };
 
 // Edit a post for a specific user
-export const updatePost = async (username: string, post: PostProps) => {
+export const updatePost = async (post: PostProps) => {
   if (!post.id) {
     throw new Error("Post id is missing");
   }
@@ -45,7 +45,7 @@ export const updatePost = async (username: string, post: PostProps) => {
 };
 
 // Toggle like for a specific user
-export const toggleLike = async (username: string, post: PostProps) => {
+export const toggleLike = async (post: PostProps) => {
   if (!post.id) {
     throw new Error("Post id is missing");
   }
